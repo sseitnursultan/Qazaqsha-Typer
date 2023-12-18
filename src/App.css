@@ -21,7 +21,11 @@ body{
     padding: 35px;
     background: #fff;
     border-radius: 10px;
+}
 
+.wrapper .input-field{
+    position: relative;
+    z-index: -999;
 }
 
 .wrapper .content-box{
