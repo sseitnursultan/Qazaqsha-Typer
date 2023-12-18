@@ -1,26 +1,38 @@
+import react, {useEffect, useRef, useState} from 'react'
+import {Card} from '../src/components/Card'
+import './App.css'
+import {Words, Titles} from "./Words";
+
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [typingText, setTypingText]= useState<any[]>([])
+    const [characters,setCharacters] = useState('')
+
+
+    const typingTextRef = useRef(null)
+
+    useEffect(()=>{
+        randomParagraph()
+    },[])
+
+    function randomParagraph() {
+        const randomIndex = Math.floor(Math.random() * Words.length)
+        const characters = Words[randomIndex].split("")
+        const spanElements = characters.map((char,index)=>(
+            <span key={index}>{char}</span>
+        ))
+        setTypingText(spanElements)
+    }
+
+    return (
+        <div className={'app'}>
+            <Card typingText={typingText}
+                  randomParagraph={randomParagraph}
+            />
+        </div>
+    );
 }
 
 export default App;
